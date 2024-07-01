@@ -11,7 +11,7 @@
     </form>
     <?php
         if(isset($_GET['name'])){
-            $value = $_GET['name'];
+            $value = htmlspecialchars($_GET['name']);
             echo $value;
         }
     ?>
