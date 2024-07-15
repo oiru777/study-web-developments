@@ -11,8 +11,8 @@
         <input type="submit" value="送信">
     </form>
     <?php
-        if(isset($_GET['name'])){
-            $value = htmlspecialchars($_GET['name']);
+        if(isset($_POST['name'])){
+            $value = htmlspecialchars($_POST['name']);
             echo $value;
         }
     ?>
