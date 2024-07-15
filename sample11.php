@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="utf-8">
-    <title>WEB開発7回目</title>
+    <title>WEB開発8回目</title>
 </head>
 <body>
     <form action="sample11.php" method="post" enctype="multipart/form-data">
