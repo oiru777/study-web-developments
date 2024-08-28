@@ -38,14 +38,14 @@
                     $records  = $pdo->query('SELECT * FROM login'); 
                     
                     if(isset($records)){
+                        $message = 'ユーザーネームまたはパスワードが正しくありません';
                         foreach ($records as $record) {
                             if ($record['username'] == $username && $record['password'] == $password){
-                                echo 'ログイン成功';
+                                $message = 'ログイン成功';
                                 $_SESSION['username'] = $record['username'];
-                            } else {
-                                echo 'ユーザーネームまたはパスワードが正しくありません';
                             }
                         }
+                        echo $message;
         ;            }
                     
                     
