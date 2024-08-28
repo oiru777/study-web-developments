@@ -29,30 +29,29 @@
             </form>
 
             <?php
-            if(isset($_POST['username']) && isset($_POST['password'])){
-                $username = htmlspecialchars($_POST['username']);
-                $password = htmlspecialchars($_POST['password']);
+         if(isset($_POST['username']) && isset($_POST['password'])){
+            $username = htmlspecialchars($_POST['username']);
+            $password = htmlspecialchars($_POST['password']);
 
-                try {
-                    //データを検索
-                    $records  = $pdo->query('SELECT * FROM login'); 
-                    
-                    if(isset($records)){
-                        $message = 'ユーザーネームまたはパスワードが正しくありません';
+            try {
+                //データを検索
+                $records  = $pdo->query("SELECT * FROM login WHERE username='{$username}' AND password='{$password}'"); 
+                $message = 'ユーザーネームまたはパスワードが正しくありません';
+                foreach ($records as $record) {
+                    if($record!=NULL){
+                        $message = 'ログイン成功';
+                        
                         foreach ($records as $record) {
-                            if ($record['username'] == $username && $record['password'] == $password){
-                                $message = 'ログイン成功';
-                                $_SESSION['username'] = $record['username'];
+                            echo $record;
                             }
-                        }
-                        echo $message;
-        ;            }
-                    
-                    
-                } catch (PDOException $e) {
-                    echo 'クエリエラー: ' . $e->getMessage();
+    
+                    } 
                 }
-            }      
+                echo $message;
+            }
+            } catch (PDOException $e) {
+                echo 'クエリエラー: ' . $e->getMessage();
+            }
             ?>
         <?php endif ?>
     </div>
