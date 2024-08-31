@@ -16,14 +16,25 @@
                 exit; 
             }
         ?>
-        <?php if(isset($_SESSION['username'])): ?>
+        <?php if(isset($_SESSION['username']) && $_SESSION['username']!==''): ?>
             <p>ログイン済み</p>
+            <?php 
+            if (isset($_POST['logout'])) {
+                $_SESSION['username'] = '';
+                header("Location:./kadai3.php");
+                exit();
+
+            }
+            ?>
+            <form action="kadai3.php" method="post">
+                <button type="submit" name="logout">ログアウト</button>
+            </form>
         <?php else: ?>
             <form action="kadai3.php" method="post">
             <p>ユーザーネーム</p>
             <input id="username" type="text" name="username">
             <p>パスワード</p>
-            <input id="password" type="text" name="password">
+            <input id="password" type="password" name="password">
             
             <input type="submit" value="ログイン">
             </form>
@@ -40,19 +51,19 @@
                 foreach ($records as $record) {
                     if($record!=NULL){
                         $message = 'ログイン成功';
-                        
-                        foreach ($records as $record) {
-                            echo $record;
-                            }
-    
+                        $_SESSION['username'] = $_POST['username'];
+                        header("Location:./kadai3.php");
+                        exit();
                     } 
                 }
                 echo $message;
             }
-            } catch (PDOException $e) {
+            catch (PDOException $e) {
                 echo 'クエリエラー: ' . $e->getMessage();
             }
+        }
             ?>
+        
         <?php endif ?>
     </div>
 </body>
